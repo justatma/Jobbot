@@ -1,0 +1,23 @@
+#javascript_to_clip2GS.txt
+
+javascript:(function(){
+  // --- CONFIGURE THIS ---
+  var sheeturl = 'https://script.google.com/macros/s/AKfycbzp5OcB0wM3G6FH7SZqt3mG0JXiZzPVhZab7ReWJTDgJks3jhpZ_NUaZhA4kufD1fhm/exec';  // <-- Your Apps Script Web App URL!
+  // --- JD Selector Examples ---
+  // For Indeed, try the selector below:
+  var descEl = document.querySelector('div.jobsearch-jobDescriptionText')
+    || document.body; // fallback in case selector fails
+  var jd = descEl ? descEl.innerText : '';
+  var payload = {
+    title: document.title,
+    url: location.href,
+    jd: jd
+  };
+  fetch(sheeturl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  });
+  alert('Job sent to your Google Sheet!');
+})();
